@@ -1,0 +1,24 @@
+# --- Web UI ---
+streamlit>=1.30.0
+
+# --- Speech-to-Text (Member 1) ---
+faster-whisper>=1.0.0
+soundfile>=0.12.1
+
+# --- Speaker Diarization (Member 1) ---
+torch>=2.0.0
+torchaudio==2.11.0
+pyannote.audio==4.0.7
+pytorch-lightning>=2.0.0
+torchmetrics>=1.0.0
+scikit-learn>=1.0.0
+
+# --- Meeting Intelligence & Summarization (Member 2) ---
+transformers>=4.38.0
+
+# --- Evaluation Metrics ---
+jiwer>=3.0.0
+
+# --- Forced Dependency Fixes (To prevent Streamlit/MediaPipe crashes) ---
+pandas<3.0.0
+protobuf<5.0.0 
