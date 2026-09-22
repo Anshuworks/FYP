@@ -1,24 +1,32 @@
+# --- PyTorch CPU Base (Critical for Windows CPU environments) ---
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.2
+torchaudio==2.2.2
+
+# --- Voice Activity Detection (Member 1) ---
+silero-vad==6.2.2
+soundfile==0.14.0
+
+# --- Speech-to-Text (Member 1) ---
+faster-whisper==1.2.1
+
+# --- Speaker Diarization (Member 1) ---
+pyannote.audio==3.1.1
+pytorch-lightning==2.6.6
+torchmetrics==1.9.0
+scikit-learn==1.9.1
+
+# --- Meeting Intelligence & Summarization (Member 2) ---
+transformers==4.56.2
+
 # --- Web UI ---
 streamlit>=1.30.0
 
-# --- Speech-to-Text (Member 1) ---
-faster-whisper>=1.0.0
-soundfile>=0.12.1
-
-# --- Speaker Diarization (Member 1) ---
-torch>=2.0.0
-torchaudio==2.11.0
-pyannote.audio==4.0.7
-pytorch-lightning>=2.0.0
-torchmetrics>=1.0.0
-scikit-learn>=1.0.0
-
-# --- Meeting Intelligence & Summarization (Member 2) ---
-transformers>=4.38.0
-
 # --- Evaluation Metrics ---
-jiwer>=3.0.0
+jiwer==4.0.0
 
-# --- Forced Dependency Fixes (To prevent Streamlit/MediaPipe crashes) ---
-pandas<3.0.0
-protobuf<5.0.0 
+# --- Forced Dependency Fixes (Environment Stabilizers) ---
+# Prevents the np.NaN removal crash in PyAnnote
+numpy<2.0.0 
+pandas==2.3.3
+protobuf==5.29.6

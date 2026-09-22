@@ -41,8 +41,8 @@ def diarize_audio(audio_path: str, hf_token: str):
     print("Loading PyAnnote Diarization pipeline...")
     try:
         pipeline = Pipeline.from_pretrained(
-            "pyannote/speaker-diarization-3.1",
-            token=hf_token
+        "pyannote/speaker-diarization-3.1",
+        use_auth_token=hf_token
         )
     except Exception as e:
         raise RuntimeError(f"Failed to load PyAnnote. Error: {e}")
@@ -55,10 +55,7 @@ def diarize_audio(audio_path: str, hf_token: str):
     print("NOTE: PyAnnote on CPU is intensive. This may take 1.5x - 2.5x the audio length.")
     
     # Run the model on the clean WAV file
-    output = pipeline(wav_path)
-    
-    # PyAnnote 4.x returns a wrapper; we need to extract the actual speaker diarization object
-    diarization = output.speaker_diarization
+    diarization = pipeline(wav_path)
 
     # Extract results into a clean, structured list of dictionaries
     speaker_intervals = []
