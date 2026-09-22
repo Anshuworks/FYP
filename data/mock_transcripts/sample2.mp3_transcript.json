@@ -1,0 +1,66 @@
+{
+    "meeting_id": "sample2",
+    "language": "en",
+    "segments": [
+        {
+            "id": 1,
+            "speaker": "SPEAKER_02",
+            "start": 0.0,
+            "end": 8.55,
+            "raw_text": "Come in. Sit down. Sarah, look at me. You look exhausted. Tell me what's going on.",
+            "cleaned_text": "",
+            "text": "Come in. Sit down. Sarah, look at me. You look exhausted. Tell me what's going on.",
+            "overlap": false
+        },
+        {
+            "id": 2,
+            "speaker": "SPEAKER_00",
+            "start": 9.49,
+            "end": 23.88,
+            "raw_text": "Doctor, I can't sleep. The fever won't break. Every breath hurts. She's been coughing until she can't breathe. She kept saying it was nothing. Look at her. It is not nothing.",
+            "cleaned_text": "",
+            "text": "Doctor, I can't sleep. The fever won't break. Every breath hurts. She's been coughing until she can't breathe. She kept saying it was nothing. Look at her. It is not nothing.",
+            "overlap": false
+        },
+        {
+            "id": 3,
+            "speaker": "SPEAKER_02",
+            "start": 23.88,
+            "end": 42.51,
+            "raw_text": "All right, deep breath for me. Again, temperature is 38.5. Throats inflamed. This is influenza, not a cold. Is it serious? I have to be back at work on Monday.",
+            "cleaned_text": "",
+            "text": "All right, deep breath for me. Again, temperature is 38.5. Throats inflamed. This is influenza, not a cold. Is it serious? I have to be back at work on Monday.",
+            "overlap": false
+        },
+        {
+            "id": 4,
+            "speaker": "SPEAKER_01",
+            "start": 43.43,
+            "end": 50.73,
+            "raw_text": "You'll be fine, but your body needs rest, real rest. I'll prescribe something for the fever.",
+            "cleaned_text": "",
+            "text": "You'll be fine, but your body needs rest, real rest. I'll prescribe something for the fever.",
+            "overlap": false
+        },
+        {
+            "id": 5,
+            "speaker": "SPEAKER_00",
+            "start": 50.73,
+            "end": 59.37,
+            "raw_text": "Water, sleep, no heroics. Don't worry, doctor. I'll keep her in bed even if I have to hide her laptop.",
+            "cleaned_text": "",
+            "text": "Water, sleep, no heroics. Don't worry, doctor. I'll keep her in bed even if I have to hide her laptop.",
+            "overlap": false
+        },
+        {
+            "id": 6,
+            "speaker": "SPEAKER_01",
+            "start": 60.23,
+            "end": 65.81,
+            "raw_text": "Perfect. And Sarah, if that fever hasn't broken by Thursday, you come straight back to me.",
+            "cleaned_text": "",
+            "text": "Perfect. And Sarah, if that fever hasn't broken by Thursday, you come straight back to me.",
+            "overlap": false
+        }
+    ]
+}

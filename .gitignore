@@ -1,0 +1,14 @@
+myREADme.md
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+*.mp3
+*.m4a
+*.wav
+temp_audio.*
+models/
+.cache/
+.env
