@@ -21,4 +21,4 @@ jiwer>=3.0.0
 
 # --- Forced Dependency Fixes (To prevent Streamlit/MediaPipe crashes) ---
 pandas<3.0.0
-protobuf<5.0.0 
+protobuf>=5.0,<6.0
