@@ -2,6 +2,7 @@ import os
 import shutil
 import subprocess
 import torch
+import time
 
 # --- WINDOWS PYTHON 3.8+ DLL FIX FOR TORCHCODEC ---
 # Python 3.8+ ignores the system PATH for DLLs. We must explicitly inject it so it finds FFmpeg.
@@ -54,8 +55,10 @@ def diarize_audio(audio_path: str, hf_token: str):
     print(f"Running diarization on {os.path.basename(wav_path)}...")
     print("NOTE: PyAnnote on CPU is intensive. This may take 1.5x - 2.5x the audio length.")
     
+    t0 = time.perf_counter()
     # Run the model on the clean WAV file
     output = pipeline(wav_path)
+    diarize_duration = time.perf_counter() - t0
     
     # PyAnnote 4.x returns a wrapper; we need to extract the actual speaker diarization object
     diarization = output.speaker_diarization
@@ -69,7 +72,8 @@ def diarize_audio(audio_path: str, hf_token: str):
             "end": round(turn.end, 2)
         })
 
-    print(f"Diarization complete! Found {len(set([s['speaker'] for s in speaker_intervals]))} unique speakers.")
+    unique_speakers_count = len(set([s['speaker'] for s in speaker_intervals]))
+    print(f"Diarization complete! Found {unique_speakers_count} unique speakers in {diarize_duration:.2f}s.")
     return speaker_intervals
 
 

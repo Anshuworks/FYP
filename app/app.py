@@ -12,8 +12,7 @@ sys.path.append(parent_dir)
 from member1_speech.asr.transcriber import transcribe_audio
 from member1_speech.diarization.diarizer import diarize_audio
 from member1_speech.alignment.aligner import align_and_merge
-from member2_intelligence.preprocessing.preprocessor import clean_transcript
-from member2_intelligence.llm.summarizer import generate_summary 
+from member2_intelligence.pipeline import run_intelligence_pipeline
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
@@ -54,11 +53,23 @@ uploaded_file = st.file_uploader(
     help="Upload your meeting recording here."
 )
 
+# Session state initialization for retaining pipeline results across reruns
+if "processed_data" not in st.session_state:
+    st.session_state["processed_data"] = None
+if "current_file" not in st.session_state:
+    st.session_state["current_file"] = None
+
 if uploaded_file is not None:
+    # Reset state if a new file is uploaded
+    if st.session_state["current_file"] != uploaded_file.name:
+        st.session_state["processed_data"] = None
+        st.session_state["current_file"] = uploaded_file.name
+
     st.audio(uploaded_file)
     
-    if st.button("🚀 Process Meeting Audio", use_container_width=True):
-        
+    process_clicked = st.button("🚀 Process Meeting Audio", use_container_width=True)
+
+    if process_clicked:
         if not hf_token:
             st.error("⚠️ Please enter your Hugging Face Token in the sidebar to run the pipeline!")
             st.stop()
@@ -72,30 +83,110 @@ if uploaded_file is not None:
             with st.status("Running EvidenceMeet Pipeline...", expanded=True) as status_box:
                 
                 # --- MEMBER 1: SPEECH PIPELINE ---
-                st.write("⏳ 1. Initializing Whisper Model...")
+                # Stage 1: Transcription
+                t0 = time.perf_counter()
                 raw_text, segments, lang_code = transcribe_audio(temp_filename)
-                st.write(f"✅ 1. Transcription Finished (Detected: **{lang_code.upper()}**)")
+                t_transcription = time.perf_counter() - t0
+                st.write(f"✅ 1. Transcription — {t_transcription:.2f} sec")
                 
-                st.write("⏳ 2. Running Speaker Diarization (PyAnnote)...")
+                # Stage 2: Speaker Diarization
+                t0 = time.perf_counter()
                 diarization_intervals = diarize_audio(temp_filename, hf_token)
-                st.write(f"✅ 2. Diarization Complete. Found {len(set([s['speaker'] for s in diarization_intervals]))} speakers.")
+                t_diarization = time.perf_counter() - t0
+                unique_speakers = sorted(list(set(s["speaker"] for s in diarization_intervals)))
+                num_speakers = len(unique_speakers)
+                st.write(f"✅ 2. Speaker Diarization — {t_diarization:.2f} sec")
+                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;👥 {num_speakers} speakers detected")
                 
-                st.write("⏳ 3. Aligning Speakers with Text...")
+                # Stage 3: Speaker Alignment
+                t0 = time.perf_counter()
                 aligned_transcript = align_and_merge(segments, diarization_intervals)
-                st.write("✅ 3. Alignment Complete")
+                t_alignment = time.perf_counter() - t0
+                st.write(f"✅ 3. Speaker Alignment — {t_alignment:.2f} sec")
 
                 # --- MEMBER 2: INTELLIGENCE PIPELINE ---
-                st.write("⏳ 4. Preprocessing & Cleaning Text...")
-                cleaned_text = clean_transcript(raw_text)
-                st.write("✅ 4. Cleaning Complete (Fillers Removed)")
+                member1_timing = {
+                    "transcription": t_transcription,
+                    "diarization": t_diarization,
+                    "alignment": t_alignment,
+                }
 
-                st.write("⏳ 5. Summarizing Transcript...")
-                summary_text = generate_summary(cleaned_text)
-                st.write("✅ 5. Summarization Complete!")
+                def on_stage_complete(stage_name, duration):
+                    if stage_name == "preprocessing":
+                        st.write(f"✅ 4. Text Preprocessing — {duration:.2f} sec")
+                    elif stage_name == "bart_summary":
+                        st.write(f"✅ 5. BART Baseline Summary — {duration:.2f} sec")
+                    elif stage_name == "qwen_extraction":
+                        st.write(f"✅ 6. Qwen Intelligence — {duration:.2f} sec")
+                    elif stage_name == "evidence":
+                        st.write(f"✅ 7. Evidence Retrieval & Verification — {duration:.2f} sec")
+
+                intelligence_result = run_intelligence_pipeline(
+                    aligned_transcript,
+                    lang_code,
+                    uploaded_file.name,
+                    member1_timing=member1_timing,
+                    stage_callback=on_stage_complete,
+                )
+
+                processed_transcript = intelligence_result["transcript"]
+                cleaned_text = intelligence_result["cleaned_text"]
+                summary_text = intelligence_result["summary"]
+                timing = intelligence_result["timing"]
+
+                total_seconds = timing["total"]
+                total_min = int(total_seconds // 60)
+                rem_sec = total_seconds % 60
+                total_str = f"{total_min} min {rem_sec:.2f} sec"
+
+                st.write("")
+                st.write("🚀 **Pipeline Complete!**")
+                st.write(f"Total processing time: {total_str}")
 
                 status_box.update(label="🚀 Pipeline Complete!", state="complete", expanded=False)
 
-        # --- DISPLAY RESULTS ---
+        # Cleanup temp files
+        if os.path.exists(temp_filename):
+            os.remove(temp_filename)
+        wav_filename = temp_filename.rsplit('.', 1)[0] + ".wav"
+        if os.path.exists(wav_filename):
+            os.remove(wav_filename)
+
+        # Store in session state for persistence across user interactions (e.g. speaker renaming)
+        st.session_state["processed_data"] = {
+            "aligned_transcript": aligned_transcript,
+            "unique_speakers": unique_speakers,
+            "cleaned_text": cleaned_text,
+            "summary_text": summary_text,
+            "timing": timing,
+            "total_str": total_str,
+        }
+
+    # Display processing stages summary when results exist but process wasn't just run
+    if st.session_state["processed_data"] is not None and not process_clicked:
+        data = st.session_state["processed_data"]
+        t = data["timing"]
+        with st.expander("🔍 See Processing Stages", expanded=False):
+            st.write(f"✅ 1. Transcription — {t.get('transcription', 0.0):.2f} sec")
+            st.write(f"✅ 2. Speaker Diarization — {t.get('diarization', 0.0):.2f} sec")
+            st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;👥 {len(data['unique_speakers'])} speakers detected")
+            st.write(f"✅ 3. Speaker Alignment — {t.get('alignment', 0.0):.2f} sec")
+            st.write(f"✅ 4. Text Preprocessing — {t.get('preprocessing', 0.0):.2f} sec")
+            st.write(f"✅ 5. BART Baseline Summary — {t.get('bart_summary', 0.0):.2f} sec")
+            st.write(f"✅ 6. Qwen Intelligence — {t.get('qwen_extraction', 0.0):.2f} sec")
+            st.write(f"✅ 7. Evidence Retrieval & Verification — {t.get('evidence', 0.0):.2f} sec")
+            st.write("")
+            st.write("🚀 **Pipeline Complete!**")
+            st.write(f"Total processing time: {data['total_str']}")
+
+    # --- DISPLAY RESULTS ---
+    if st.session_state["processed_data"] is not None:
+        data = st.session_state["processed_data"]
+        summary_text = data["summary_text"]
+        cleaned_text = data["cleaned_text"]
+        aligned_transcript = data["aligned_transcript"]
+        unique_speakers = data["unique_speakers"]
+
         st.divider()
         tab1, tab2, tab3 = st.tabs(["📋 Summary", "✨ Cleaned Text", "💬 Smart Transcript"])
 
@@ -111,26 +202,43 @@ if uploaded_file is not None:
 
         with tab3:
             st.subheader("Diarized Meeting Log")
+
+            # --- 3. SPEAKER COUNT ---
+            st.markdown(f"#### 👥 {len(unique_speakers)} Speakers Detected")
+
+            # --- 4. MANUAL SPEAKER NAME MAPPING ---
+            with st.expander("🏷️ Edit Speaker Names (Optional)", expanded=False):
+                st.caption("Map detected speaker IDs to names for transcript display:")
+                speaker_name_map = {}
+                for spk in unique_speakers:
+                    col1, col2 = st.columns([1, 2])
+                    with col1:
+                        st.markdown(f"**{spk}** →")
+                    with col2:
+                        custom_name = st.text_input(
+                            f"Name for {spk}",
+                            key=f"speaker_input_{spk}",
+                            placeholder="Enter name",
+                            label_visibility="collapsed",
+                        )
+                    if custom_name and custom_name.strip():
+                        speaker_name_map[spk] = custom_name.strip()
+                    else:
+                        speaker_name_map[spk] = spk
+
             # Upgrade to dynamic Chat Bubbles!
             avatars = ["🧑‍💼", "👩‍💻", "👨‍🏫", "👩‍🔬", "🕵️", "🧑‍⚕️"]
             speaker_avatars = {}
             
             for block in aligned_transcript:
-                speaker = block["speaker"]
-                if speaker not in speaker_avatars:
-                    speaker_avatars[speaker] = avatars[len(speaker_avatars) % len(avatars)]
+                speaker_id = block["speaker"]
+                display_name = speaker_name_map.get(speaker_id, speaker_id)
+                if speaker_id not in speaker_avatars:
+                    speaker_avatars[speaker_id] = avatars[len(speaker_avatars) % len(avatars)]
                 
-                with st.chat_message(name=speaker, avatar=speaker_avatars[speaker]):
-                    st.caption(f"{speaker} • {block['start']:05.2f}s - {block['end']:05.2f}s")
+                with st.chat_message(name=display_name, avatar=speaker_avatars[speaker_id]):
+                    st.caption(f"{display_name} • {block['start']:05.2f}s - {block['end']:05.2f}s")
                     st.write(block["text"])
-
-        # Cleanup
-        if os.path.exists(temp_filename):
-            os.remove(temp_filename)
-        # Also clean up the WAV file generated by the diarizer!
-        wav_filename = temp_filename.rsplit('.', 1)[0] + ".wav"
-        if os.path.exists(wav_filename):
-            os.remove(wav_filename)
 
 else:
     st.info("Upload an audio file to start the transcription and summarization pipeline.")
