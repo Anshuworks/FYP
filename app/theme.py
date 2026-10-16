@@ -12,8 +12,8 @@ def get_theme_css(theme: str = "dark") -> str:
         tokens = """
   --bg-app:          #f8fafc;
   --bg-sidebar:      linear-gradient(180deg, #f1f5f9 0%, #ffffff 100%);
-  --bg-card:         rgba(255, 255, 255, 0.94);
-  --bg-card-hover:   #ffffff;
+  --bg-card:         #ffffff;
+  --bg-card-hover:   #f8fafc;
   --bg-input:        #ffffff;
   --bg-header:       linear-gradient(135deg, #ffffff 0%, rgba(124, 58, 237, 0.08) 100%);
   --border-glass:    rgba(124, 58, 237, 0.18);
@@ -40,14 +40,15 @@ def get_theme_css(theme: str = "dark") -> str:
   --badge-unv-tx:    #b91c1c;
   --audio-filter:    none;
   --tbl-th-bg:       #ede9fe;
-  --tbl-th-tx:       #5b21b6;
+  --tbl-th-tx:       #4338ca;
   --tbl-row-hover:   rgba(124, 58, 237, 0.05);
   --tbl-border:      #e2e8f0;
   --shadow-card:     0 4px 20px rgba(0, 0, 0, 0.06);
   --shadow-glow:     0 0 24px rgba(124, 58, 237, 0.14);
   --code-bg:         rgba(124, 58, 237, 0.08);
-  --code-tx:         #6d28d9;
+  --code-tx:         #4338ca;
   --quote-bg:        rgba(124, 58, 237, 0.04);
+  --quote-tx:        #1d4ed8;
   --title-gradient:  linear-gradient(135deg, #0f172a 0%, #6d28d9 60%, #2563eb 100%);
   --btn-proc-bg:     linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
   --btn-proc-hover:  linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
@@ -55,26 +56,44 @@ def get_theme_css(theme: str = "dark") -> str:
   --btn-proc-bd:     rgba(16, 185, 129, 0.45);
   --btn-proc-shadow: 0 3px 12px rgba(16, 185, 129, 0.20);
   --btn-proc-shadow-hov: 0 5px 16px rgba(16, 185, 129, 0.30);
+  --btn-sec-bg:      #ffffff;
+  --btn-sec-hover:   #f1f5f9;
+  --btn-sec-tx:      #1e293b;
+  --btn-sec-bd:      #cbd5e1;
+  --btn-sec-shadow:  0 1px 3px rgba(0, 0, 0, 0.06);
+  --btn-sec-shadow-hov: 0 3px 8px rgba(0, 0, 0, 0.10);
   --tooltip-bg:      rgba(15, 23, 42, 0.95);
   --tooltip-tx:      #f8fafc;
   --tooltip-bd:      rgba(16, 185, 129, 0.40);
+  --alert-info-bg:   #eff6ff;
+  --alert-info-tx:   #1e40af;
+  --alert-info-bd:   #bfdbfe;
+  --alert-warn-bg:   #fffbeb;
+  --alert-warn-tx:   #92400e;
+  --alert-warn-bd:   #fde68a;
+  --alert-succ-bg:   #f0fdf4;
+  --alert-succ-tx:   #166534;
+  --alert-succ-bd:   #bbf7d0;
+  --anchor-jump-bg:  rgba(217, 119, 6, 0.10);
+  --anchor-jump-bd:  rgba(217, 119, 6, 0.35);
+  --anchor-jump-tx:  #92400e;
 """
     else:
         tokens = """
-  --bg-app:          #060b18;
-  --bg-sidebar:      linear-gradient(180deg, #0a1128 0%, #060b18 100%);
-  --bg-card:         rgba(15, 26, 58, 0.75);
-  --bg-card-hover:   rgba(22, 36, 75, 0.85);
-  --bg-input:        rgba(255, 255, 255, 0.05);
-  --bg-header:       linear-gradient(135deg, #0f1a3a 0%, rgba(124, 58, 237, 0.12) 100%);
-  --border-glass:    rgba(139, 92, 246, 0.20);
-  --border-focus:    #8b5cf6;
-  --border-subtle:   rgba(255, 255, 255, 0.05);
-  --text-primary:    #f0f4ff;
-  --text-secondary:  #94a3c0;
-  --text-muted:      #64748b;
-  --accent-violet:   #8b5cf6;
-  --accent-violet-light: #a78bfa;
+  --bg-app:          #0a0f1d;
+  --bg-sidebar:      linear-gradient(180deg, #0d1527 0%, #0a0f1d 100%);
+  --bg-card:         #131c31;
+  --bg-card-hover:   #18243e;
+  --bg-input:        #0e1526;
+  --bg-header:       linear-gradient(135deg, #131d33 0%, rgba(99, 102, 241, 0.16) 100%);
+  --border-glass:    rgba(148, 163, 184, 0.16);
+  --border-focus:    #818cf8;
+  --border-subtle:   rgba(148, 163, 184, 0.08);
+  --text-primary:    #f8fafc;
+  --text-secondary:  #cbd5e1;
+  --text-muted:      #94a3b8;
+  --accent-violet:   #818cf8;
+  --accent-violet-light: #a5b4fc;
   --accent-blue:     #60a5fa;
   --accent-cyan:     #22d3ee;
   --accent-emerald:  #34d399;
@@ -90,25 +109,44 @@ def get_theme_css(theme: str = "dark") -> str:
   --badge-unv-bd:    rgba(248, 113, 113, 0.40);
   --badge-unv-tx:    #f87171;
   --audio-filter:    invert(0.85) hue-rotate(200deg);
-  --tbl-th-bg:       rgba(124, 58, 237, 0.25);
-  --tbl-th-tx:       #a78bfa;
-  --tbl-row-hover:   rgba(139, 92, 246, 0.08);
-  --tbl-border:      rgba(255, 255, 255, 0.05);
-  --shadow-card:     0 4px 24px rgba(0, 0, 0, 0.45);
-  --shadow-glow:     0 0 32px rgba(124, 58, 237, 0.18);
-  --code-bg:         rgba(139, 92, 246, 0.18);
-  --code-tx:         #a78bfa;
-  --quote-bg:        rgba(124, 58, 237, 0.08);
-  --title-gradient:  linear-gradient(135deg, #f0f4ff 0%, #a78bfa 60%, #93c5fd 100%);
+  --tbl-th-bg:       #17223b;
+  --tbl-th-tx:       #c7d2fe;
+  --tbl-row-hover:   rgba(99, 102, 241, 0.08);
+  --tbl-border:      rgba(148, 163, 184, 0.12);
+  --shadow-card:     0 4px 24px rgba(0, 0, 0, 0.40);
+  --shadow-glow:     0 0 32px rgba(99, 102, 241, 0.18);
+  --code-bg:         #1a2540;
+  --code-tx:         #c7d2fe;
+  --quote-bg:        #162038;
+  --quote-tx:        #93c5fd;
+  --title-gradient:  linear-gradient(135deg, #f8fafc 0%, #c7d2fe 60%, #93c5fd 100%);
   --btn-proc-bg:     linear-gradient(135deg, #059669 0%, #10b981 40%, #34d399 100%);
   --btn-proc-hover:  linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
   --btn-proc-tx:     #022c22;
   --btn-proc-bd:     rgba(52, 211, 153, 0.45);
   --btn-proc-shadow: 0 3px 14px rgba(16, 185, 129, 0.25);
   --btn-proc-shadow-hov: 0 6px 20px rgba(16, 185, 129, 0.35);
+  --btn-sec-bg:      #17223b;
+  --btn-sec-hover:   #1e2c4c;
+  --btn-sec-tx:      #f1f5f9;
+  --btn-sec-bd:      rgba(148, 163, 184, 0.25);
+  --btn-sec-shadow:  0 2px 8px rgba(0, 0, 0, 0.20);
+  --btn-sec-shadow-hov: 0 4px 12px rgba(0, 0, 0, 0.30);
   --tooltip-bg:      rgba(10, 16, 34, 0.96);
   --tooltip-tx:      #e2e8f0;
   --tooltip-bd:      rgba(52, 211, 153, 0.35);
+  --alert-info-bg:   rgba(37, 99, 235, 0.16);
+  --alert-info-tx:   #93c5fd;
+  --alert-info-bd:   rgba(96, 165, 250, 0.35);
+  --alert-warn-bg:   rgba(217, 119, 6, 0.16);
+  --alert-warn-tx:   #fde68a;
+  --alert-warn-bd:   rgba(251, 191, 36, 0.35);
+  --alert-succ-bg:   rgba(5, 150, 105, 0.16);
+  --alert-succ-tx:   #6ee7b7;
+  --alert-succ-bd:   rgba(52, 211, 153, 0.35);
+  --anchor-jump-bg:  rgba(251, 191, 36, 0.15);
+  --anchor-jump-bd:  rgba(251, 191, 36, 0.40);
+  --anchor-jump-tx:  #fbbf24;
 """
 
     return f"""
@@ -138,8 +176,106 @@ html, body, [data-testid="stAppViewContainer"],
   background: transparent !important;
 }}
 
-/* Hide default streamlit header / footer branding */
-#MainMenu, [data-testid="stHeader"], footer {{ display: none !important; }}
+/* Hide default streamlit header / footer branding while preserving navigation controls */
+#MainMenu, footer, [data-testid="stToolbarActions"], [data-testid="stDecoration"], [data-testid="stStatusWidget"] {{
+  display: none !important;
+}}
+
+/* Allow stHeader to pass through clicks except for navigation controls */
+[data-testid="stHeader"] {{
+  background: transparent !important;
+  color: transparent !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  border: none !important;
+  z-index: 99999 !important;
+}}
+
+[data-testid="stHeader"] > * {{
+  pointer-events: none !important;
+}}
+
+[data-testid="stToolbar"] {{
+  background: transparent !important;
+  pointer-events: none !important;
+}}
+
+/* ── Always-visible Fixed Navigation Restore / Expand Button ── */
+[data-testid="stExpandSidebarButton"],
+[data-testid="stSidebarCollapsedControl"] {{
+  display: flex !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  top: 14px !important;
+  left: 14px !important;
+  z-index: 100000 !important;
+  width: 38px !important;
+  height: 38px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-glass) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-card) !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  opacity: 1 !important;
+}}
+
+[data-testid="stExpandSidebarButton"]:hover,
+[data-testid="stSidebarCollapsedControl"]:hover {{
+  background: var(--bg-card-hover) !important;
+  border-color: var(--border-focus) !important;
+  transform: scale(1.05) !important;
+  box-shadow: var(--shadow-glow) !important;
+}}
+
+[data-testid="stExpandSidebarButton"] button,
+[data-testid="stSidebarCollapsedControl"] button {{
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-primary) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}}
+
+[data-testid="stExpandSidebarButton"] svg,
+[data-testid="stExpandSidebarButton"] span,
+[data-testid="stSidebarCollapsedControl"] svg,
+[data-testid="stSidebarCollapsedControl"] span {{
+  color: var(--text-primary) !important;
+  fill: var(--text-primary) !important;
+  font-size: 1.25rem !important;
+}}
+
+[data-testid="stExpandSidebarButton"]:hover svg,
+[data-testid="stExpandSidebarButton"]:hover span,
+[data-testid="stSidebarCollapsedControl"]:hover svg,
+[data-testid="stSidebarCollapsedControl"]:hover span {{
+  color: var(--accent-violet) !important;
+  fill: var(--accent-violet) !important;
+}}
+
+/* ── Sidebar Collapse Button inside Sidebar ── */
+[data-testid="stSidebarCollapseButton"] button {{
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-sm) !important;
+  transition: var(--transition) !important;
+}}
+
+[data-testid="stSidebarCollapseButton"] button:hover {{
+  background: var(--bg-card-hover) !important;
+  color: var(--accent-violet) !important;
+}}
 
 /* ── Scrollbar ────────────────────────────────────────── */
 ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
@@ -181,15 +317,35 @@ html, body, [data-testid="stAppViewContainer"],
   border-color: var(--border-focus) !important;
   box-shadow: var(--shadow-glow) !important;
 }}
+[data-testid="stFileUploaderDropzone"] {{
+  background: var(--bg-card) !important;
+  border: 1px dashed var(--border-glass) !important;
+  border-radius: var(--radius-md) !important;
+}}
 [data-testid="stFileUploader"] * {{ color: var(--text-secondary) !important; }}
+[data-testid="stFileUploaderDropzone"] button {{
+  background: var(--btn-sec-bg) !important;
+  color: var(--btn-sec-tx) !important;
+  border: 1px solid var(--btn-sec-bd) !important;
+  box-shadow: var(--btn-sec-shadow) !important;
+}}
+[data-testid="stFileUploaderDropzone"] button * {{
+  color: var(--btn-sec-tx) !important;
+}}
+[data-testid="stFileUploaderDropzone"] button:hover {{
+  background: var(--btn-sec-hover) !important;
+  border-color: var(--border-focus) !important;
+}}
 
 /* ── Primary Process Button (Soft Mint / Light-Green Gradient) ── */
 button[data-testid="stBaseButton-primary"],
+button[data-testid="baseButton-primary"],
 div[data-testid="stButton"] button[kind="primary"],
+div[data-testid="stButton"] button[data-testid="stBaseButton-primary"],
 .stButton button[kind="primary"],
 div[data-testid="stTooltipHoverTarget"] button[kind="primary"],
-div[data-testid="stTooltipHoverTarget"] button,
-button[data-testid="baseButton-primary"] {{
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-primary"],
+div[data-testid="stTooltipHoverTarget"] button[data-testid="baseButton-primary"] {{
   background: var(--btn-proc-bg) !important;
   color: var(--btn-proc-tx) !important;
   border: 1px solid var(--btn-proc-bd) !important;
@@ -206,22 +362,26 @@ button[data-testid="baseButton-primary"] {{
 
 /* Ensure inner label text and icons have readable high-contrast dark green color */
 button[data-testid="stBaseButton-primary"] *,
+button[data-testid="baseButton-primary"] *,
 div[data-testid="stButton"] button[kind="primary"] *,
+div[data-testid="stButton"] button[data-testid="stBaseButton-primary"] *,
 .stButton button[kind="primary"] *,
 div[data-testid="stTooltipHoverTarget"] button[kind="primary"] *,
-div[data-testid="stTooltipHoverTarget"] button *,
-button[data-testid="baseButton-primary"] * {{
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-primary"] *,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="baseButton-primary"] * {{
   color: var(--btn-proc-tx) !important;
   font-weight: 700 !important;
 }}
 
 /* Restrained Hover transition */
 button[data-testid="stBaseButton-primary"]:hover,
+button[data-testid="baseButton-primary"]:hover,
 div[data-testid="stButton"] button[kind="primary"]:hover,
+div[data-testid="stButton"] button[data-testid="stBaseButton-primary"]:hover,
 .stButton button[kind="primary"]:hover,
 div[data-testid="stTooltipHoverTarget"] button[kind="primary"]:hover,
-div[data-testid="stTooltipHoverTarget"] button:hover,
-button[data-testid="baseButton-primary"]:hover {{
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-primary"]:hover,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="baseButton-primary"]:hover {{
   background: var(--btn-proc-hover) !important;
   transform: translateY(-1px) !important;
   box-shadow: var(--btn-proc-shadow-hov) !important;
@@ -229,27 +389,32 @@ button[data-testid="baseButton-primary"]:hover {{
 }}
 
 button[data-testid="stBaseButton-primary"]:hover *,
+button[data-testid="baseButton-primary"]:hover *,
 div[data-testid="stButton"] button[kind="primary"]:hover *,
-div[data-testid="stTooltipHoverTarget"] button:hover * {{
+div[data-testid="stTooltipHoverTarget"] button[kind="primary"]:hover * {{
   color: var(--btn-proc-tx) !important;
 }}
 
 /* Active / Click */
 button[data-testid="stBaseButton-primary"]:active,
+button[data-testid="baseButton-primary"]:active,
 div[data-testid="stButton"] button[kind="primary"]:active,
+div[data-testid="stButton"] button[data-testid="stBaseButton-primary"]:active,
 .stButton button[kind="primary"]:active,
-div[data-testid="stTooltipHoverTarget"] button:active,
-button[data-testid="baseButton-primary"]:active {{
+div[data-testid="stTooltipHoverTarget"] button[kind="primary"]:active,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-primary"]:active {{
   transform: translateY(0) !important;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.18) !important;
 }}
 
 /* Restrained Focus / Focus-Visible */
 button[data-testid="stBaseButton-primary"]:focus-visible,
+button[data-testid="baseButton-primary"]:focus-visible,
 div[data-testid="stButton"] button[kind="primary"]:focus-visible,
+div[data-testid="stButton"] button[data-testid="stBaseButton-primary"]:focus-visible,
 .stButton button[kind="primary"]:focus-visible,
-div[data-testid="stTooltipHoverTarget"] button:focus-visible,
-button[data-testid="baseButton-primary"]:focus-visible {{
+div[data-testid="stTooltipHoverTarget"] button[kind="primary"]:focus-visible,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-primary"]:focus-visible {{
   outline: 2px solid #34d399 !important;
   outline-offset: 2px !important;
   box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25) !important;
@@ -299,63 +464,111 @@ body:has(button[kind="primary"]:active) [data-baseweb="popover"] {{
   visibility: hidden !important;
 }}
 
-/* ── Standard / Secondary Buttons ─────────────────────── */
-.stButton > button {{
-  background: linear-gradient(135deg, var(--accent-violet) 0%, #4f46e5 100%) !important;
-  color: #ffffff !important;
-  border: none !important;
+/* ── Standard / Secondary / Action Buttons ─────────────── */
+button[data-testid="stBaseButton-secondary"],
+button[data-testid="baseButton-secondary"],
+div[data-testid="stButton"] button[kind="secondary"],
+div[data-testid="stButton"] button[data-testid="stBaseButton-secondary"],
+.stButton button[kind="secondary"],
+div[data-testid="stTooltipHoverTarget"] button[kind="secondary"],
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-secondary"],
+div[data-testid="stTooltipHoverTarget"] button[data-testid="baseButton-secondary"],
+div[data-testid="stTooltipHoverTarget"] button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]),
+.stButton > button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]) {{
+  background: var(--btn-sec-bg) !important;
+  color: var(--btn-sec-tx) !important;
+  border: 1px solid var(--btn-sec-bd) !important;
   border-radius: var(--radius-md) !important;
   font-family: 'Inter', sans-serif !important;
   font-weight: 600 !important;
   font-size: 0.88rem !important;
-  padding: 0.55rem 1.2rem !important;
+  padding: 0.52rem 1.15rem !important;
   transition: var(--transition) !important;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.30) !important;
-}}
-.stButton > button:hover {{
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45) !important;
-  filter: brightness(1.08) !important;
-}}
-.stButton > button:active {{
-  transform: translateY(0) !important;
-  filter: brightness(0.95) !important;
+  box-shadow: var(--btn-sec-shadow) !important;
+  cursor: pointer !important;
 }}
 
-/* Jump / Clear / Return action buttons */
-.stButton > button[kind="secondary"],
-button[data-testid*="clear"],
-button[data-testid*="jump"],
-button[data-testid*="return"] {{
-  background: var(--code-bg) !important;
-  border: 1px solid var(--border-glass) !important;
-  color: var(--code-tx) !important;
-  box-shadow: none !important;
-  font-weight: 600 !important;
+/* Inner text and icons must always inherit high-contrast readable color */
+button[data-testid="stBaseButton-secondary"] *,
+button[data-testid="baseButton-secondary"] *,
+div[data-testid="stButton"] button[kind="secondary"] *,
+div[data-testid="stButton"] button[data-testid="stBaseButton-secondary"] *,
+.stButton button[kind="secondary"] *,
+div[data-testid="stTooltipHoverTarget"] button[kind="secondary"] *,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-secondary"] *,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="baseButton-secondary"] *,
+div[data-testid="stTooltipHoverTarget"] button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]) *,
+.stButton > button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]) * {{
+  color: var(--btn-sec-tx) !important;
 }}
-.stButton > button[kind="secondary"]:hover,
-button[data-testid*="clear"]:hover,
-button[data-testid*="jump"]:hover,
-button[data-testid*="return"]:hover {{
-  background: rgba(124, 58, 237, 0.20) !important;
+
+/* Hover transition */
+button[data-testid="stBaseButton-secondary"]:hover,
+button[data-testid="baseButton-secondary"]:hover,
+div[data-testid="stButton"] button[kind="secondary"]:hover,
+div[data-testid="stButton"] button[data-testid="stBaseButton-secondary"]:hover,
+.stButton button[kind="secondary"]:hover,
+div[data-testid="stTooltipHoverTarget"] button[kind="secondary"]:hover,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="stBaseButton-secondary"]:hover,
+div[data-testid="stTooltipHoverTarget"] button[data-testid="baseButton-secondary"]:hover,
+div[data-testid="stTooltipHoverTarget"] button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]):hover,
+.stButton > button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]):hover {{
+  background: var(--btn-sec-hover) !important;
   border-color: var(--border-focus) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.20) !important;
+  box-shadow: var(--btn-sec-shadow-hov) !important;
+}}
+
+button[data-testid="stBaseButton-secondary"]:hover *,
+button[data-testid="baseButton-secondary"]:hover *,
+div[data-testid="stButton"] button[kind="secondary"]:hover *,
+div[data-testid="stTooltipHoverTarget"] button[kind="secondary"]:hover *,
+div[data-testid="stTooltipHoverTarget"] button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]):hover * {{
+  color: var(--btn-sec-tx) !important;
+}}
+
+/* Active state */
+button[data-testid="stBaseButton-secondary"]:active,
+button[data-testid="baseButton-secondary"]:active,
+div[data-testid="stButton"] button[kind="secondary"]:active,
+div[data-testid="stTooltipHoverTarget"] button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]):active {{
+  transform: translateY(0) !important;
+  box-shadow: none !important;
+}}
+
+/* Focus state */
+button[data-testid="stBaseButton-secondary"]:focus-visible,
+button[data-testid="baseButton-secondary"]:focus-visible,
+div[data-testid="stButton"] button[kind="secondary"]:focus-visible,
+div[data-testid="stTooltipHoverTarget"] button:not([kind="primary"]):not([data-testid="stBaseButton-primary"]):not([data-testid="baseButton-primary"]):focus-visible {{
+  outline: 2px solid var(--border-focus) !important;
+  outline-offset: 2px !important;
 }}
 
 /* Download buttons */
-[data-testid="stDownloadButton"] > button {{
+[data-testid="stDownloadButton"] > button,
+[data-testid="stDownloadButton"] button {{
   background: rgba(34, 211, 238, 0.12) !important;
   border: 1px solid rgba(34, 211, 238, 0.35) !important;
   color: var(--accent-cyan) !important;
   font-weight: 600 !important;
   box-shadow: none !important;
 }}
-[data-testid="stDownloadButton"] > button:hover {{
+[data-testid="stDownloadButton"] > button *,
+[data-testid="stDownloadButton"] button * {{
+  color: var(--accent-cyan) !important;
+  font-weight: 600 !important;
+}}
+[data-testid="stDownloadButton"] > button:hover,
+[data-testid="stDownloadButton"] button:hover {{
   background: rgba(34, 211, 238, 0.22) !important;
   border-color: var(--accent-cyan) !important;
   box-shadow: 0 4px 14px rgba(34, 211, 238, 0.25) !important;
   transform: translateY(-1px) !important;
+}}
+[data-testid="stDownloadButton"] > button:hover *,
+[data-testid="stDownloadButton"] button:hover * {{
+  color: var(--accent-cyan) !important;
 }}
 
 /* ── Tabs ─────────────────────────────────────────────── */
@@ -379,15 +592,24 @@ button[data-testid*="return"]:hover {{
   border: none !important;
   transition: var(--transition) !important;
 }}
+[data-testid="stTabs"] [role="tab"] * {{
+  color: var(--text-secondary) !important;
+}}
 [data-testid="stTabs"] [role="tab"]:hover {{
   color: var(--accent-violet) !important;
   background: rgba(124, 58, 237, 0.08) !important;
+}}
+[data-testid="stTabs"] [role="tab"]:hover * {{
+  color: var(--accent-violet) !important;
 }}
 [data-testid="stTabs"] [role="tab"][aria-selected="true"] {{
   background: linear-gradient(135deg, var(--accent-violet), #4f46e5) !important;
   color: #ffffff !important;
   font-weight: 700 !important;
   box-shadow: 0 2px 10px rgba(124, 58, 237, 0.40) !important;
+}}
+[data-testid="stTabs"] [role="tab"][aria-selected="true"] * {{
+  color: #ffffff !important;
 }}
 
 /* ── Metrics ──────────────────────────────────────────── */
@@ -412,15 +634,23 @@ button[data-testid*="return"]:hover {{
   text-transform: uppercase;
   letter-spacing: 0.06em !important;
 }}
+[data-testid="stMetricLabel"] * {{
+  color: var(--text-secondary) !important;
+}}
 [data-testid="stMetricValue"] {{
   color: var(--text-primary) !important;
   font-size: 1.55rem !important;
   font-weight: 700 !important;
   font-family: 'JetBrains Mono', monospace !important;
 }}
+[data-testid="stMetricValue"] * {{
+  color: var(--text-primary) !important;
+}}
 
 /* ── Expanders (Collapsible sections) ─────────────────── */
-[data-testid="stExpander"] {{
+[data-testid="stExpander"],
+details[data-testid="stExpander"],
+details {{
   background: var(--bg-card) !important;
   border: 1px solid var(--border-glass) !important;
   border-radius: var(--radius-md) !important;
@@ -430,32 +660,116 @@ button[data-testid*="return"]:hover {{
   transition: var(--transition) !important;
   box-shadow: var(--shadow-card) !important;
 }}
-[data-testid="stExpander"]:hover {{
+[data-testid="stExpander"]:hover,
+details[data-testid="stExpander"]:hover,
+details:hover {{
   border-color: var(--border-focus) !important;
 }}
-[data-testid="stExpander"] summary {{
+[data-testid="stExpander"] summary,
+details[data-testid="stExpander"] summary,
+details summary {{
+  background: var(--bg-card) !important;
   color: var(--text-primary) !important;
   font-weight: 600 !important;
   padding: 14px 18px !important;
   font-size: 0.95rem !important;
 }}
-[data-testid="stExpander"] summary:hover {{
+[data-testid="stExpander"] summary *,
+details summary * {{
+  color: var(--text-primary) !important;
+}}
+[data-testid="stExpander"] summary:hover,
+details summary:hover {{
   color: var(--accent-violet) !important;
 }}
-[data-testid="stExpander"] summary svg {{
+[data-testid="stExpander"] summary:hover *,
+details summary:hover * {{
+  color: var(--accent-violet) !important;
+}}
+[data-testid="stExpander"] summary svg,
+details summary svg {{
   fill: var(--accent-violet) !important;
 }}
-[data-testid="stExpander"] [data-testid="stExpanderDetails"] {{
+[data-testid="stExpander"] [data-testid="stExpanderDetails"],
+details [data-testid="stExpanderDetails"],
+details > div:not(summary) {{
+  background: var(--bg-card) !important;
   padding: 14px 18px !important;
   border-top: 1px solid var(--border-glass) !important;
 }}
 
-/* ── Alerts ───────────────────────────────────────────── */
+/* Bordered container boxes */
+div[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] > div {{
+  background: var(--bg-card) !important;
+  border-color: var(--border-glass) !important;
+  border-radius: var(--radius-md) !important;
+}}
+
+/* ── Alerts & Notifications ───────────────────────────── */
 [data-testid="stAlert"] {{
   border-radius: var(--radius-md) !important;
-  border-left-width: 4px !important;
+  border-width: 1px 1px 1px 4px !important;
+  border-style: solid !important;
   backdrop-filter: blur(8px) !important;
   font-size: 0.88rem !important;
+  padding: 12px 18px !important;
+  box-shadow: var(--shadow-card) !important;
+}}
+/* Alert Info */
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentInfo"]),
+[data-testid="stAlert"]:has([data-testid="stIconMaterialInfo"]),
+div[data-testid="stAlert"]:has(svg[data-testid="stIconInfo"]),
+.stAlert:has(.stAlert-info) {{
+  background: var(--alert-info-bg) !important;
+  border-color: var(--alert-info-bd) !important;
+  border-left-color: var(--accent-blue) !important;
+}}
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentInfo"]) *,
+[data-testid="stAlert"]:has([data-testid="stIconMaterialInfo"]) *,
+div[data-testid="stAlert"]:has(svg[data-testid="stIconInfo"]) * {{
+  color: var(--alert-info-tx) !important;
+}}
+/* Alert Warning */
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentWarning"]),
+[data-testid="stAlert"]:has([data-testid="stIconMaterialWarning"]),
+div[data-testid="stAlert"]:has(svg[data-testid="stIconWarning"]),
+.stAlert:has(.stAlert-warning) {{
+  background: var(--alert-warn-bg) !important;
+  border-color: var(--alert-warn-bd) !important;
+  border-left-color: var(--accent-amber) !important;
+}}
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentWarning"]) *,
+[data-testid="stAlert"]:has([data-testid="stIconMaterialWarning"]) *,
+div[data-testid="stAlert"]:has(svg[data-testid="stIconWarning"]) * {{
+  color: var(--alert-warn-tx) !important;
+}}
+/* Alert Success */
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentSuccess"]),
+[data-testid="stAlert"]:has([data-testid="stIconMaterialSuccess"]),
+div[data-testid="stAlert"]:has(svg[data-testid="stIconSuccess"]),
+.stAlert:has(.stAlert-success) {{
+  background: var(--alert-succ-bg) !important;
+  border-color: var(--alert-succ-bd) !important;
+  border-left-color: var(--accent-emerald) !important;
+}}
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentSuccess"]) *,
+[data-testid="stAlert"]:has([data-testid="stIconMaterialSuccess"]) *,
+div[data-testid="stAlert"]:has(svg[data-testid="stIconSuccess"]) * {{
+  color: var(--alert-succ-tx) !important;
+}}
+/* Alert Error */
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentError"]),
+[data-testid="stAlert"]:has([data-testid="stIconMaterialError"]),
+div[data-testid="stAlert"]:has(svg[data-testid="stIconError"]),
+.stAlert:has(.stAlert-error) {{
+  background: var(--badge-unv-bg) !important;
+  border-color: var(--badge-unv-bd) !important;
+  border-left-color: var(--accent-rose) !important;
+}}
+div[data-testid="stAlert"]:has([data-testid="stNotificationContentError"]) *,
+[data-testid="stAlert"]:has([data-testid="stIconMaterialError"]) * {{
+  color: var(--badge-unv-tx) !important;
 }}
 
 /* ── Text Inputs & Textareas ──────────────────────────── */
@@ -520,6 +834,11 @@ audio {{
   border-color: var(--border-focus) !important;
   transform: translateX(2px) !important;
 }}
+[data-testid="stChatMessage"] [data-testid="stChatMessageContent"],
+[data-testid="stChatMessage"] [data-testid="stChatMessageContent"] p,
+[data-testid="stChatMessage"] .stMarkdown p {{
+  color: var(--text-primary) !important;
+}}
 
 /* ── Tables ───────────────────────────────────────────── */
 [data-testid="stTable"] table, .stDataFrame table {{
@@ -560,23 +879,42 @@ h3 {{ font-size: 1.15rem !important; font-weight: 700 !important; color: var(--a
 h4 {{ font-size: 0.98rem !important; font-weight: 600 !important; color: var(--text-secondary) !important; }}
 p, li {{ color: var(--text-secondary) !important; font-size: 0.9rem !important; }}
 strong {{ color: var(--text-primary) !important; }}
-code {{
+code,
+[data-testid="stMarkdownContainer"] code,
+.stMarkdown code,
+[data-testid="stCaptionContainer"] code,
+[data-testid="stExpanderDetails"] code,
+div[data-testid="stChatMessageContent"] code {{
   background: var(--code-bg) !important;
   color: var(--code-tx) !important;
-  border-radius: 4px !important;
-  padding: 2px 6px !important;
+  border: 1px solid var(--border-glass) !important;
+  border-radius: 6px !important;
+  padding: 2px 7px !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 0.82em !important;
+  font-weight: 500 !important;
 }}
-blockquote {{
+blockquote,
+[data-testid="stMarkdownContainer"] blockquote,
+.stMarkdown blockquote,
+[data-testid="stExpanderDetails"] blockquote {{
   border-left: 3px solid var(--accent-violet) !important;
   background: var(--quote-bg) !important;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
   padding: 10px 16px !important;
   margin: 8px 0 !important;
-  color: var(--text-secondary) !important;
+  color: var(--quote-tx) !important;
 }}
-blockquote em {{ color: var(--accent-blue) !important; font-style: italic !important; }}
+blockquote *,
+[data-testid="stMarkdownContainer"] blockquote *,
+.stMarkdown blockquote * {{
+  color: var(--quote-tx) !important;
+}}
+blockquote em,
+[data-testid="stMarkdownContainer"] blockquote em {{
+  color: var(--accent-blue) !important;
+  font-style: italic !important;
+}}
 
 /* ── Caption ──────────────────────────────────────────── */
 [data-testid="stCaptionContainer"] {{
@@ -782,34 +1120,38 @@ blockquote em {{ color: var(--accent-blue) !important; font-style: italic !impor
 /* Highlighted transcript segment (pulsing animation) */
 .em-highlight-segment {{
   padding: 10px 16px;
-  background: linear-gradient(90deg, rgba(251, 191, 36, 0.18), rgba(251, 191, 36, 0.06));
-  border-left: 4px solid #fbbf24;
+  background: var(--anchor-jump-bg) !important;
+  border-left: 4px solid var(--accent-amber) !important;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   margin: 8px 0;
+  color: var(--text-primary) !important;
   animation: em-pulse-border 2s ease-in-out infinite;
 }}
+.em-highlight-segment strong {{
+  color: var(--text-primary) !important;
+}}
 @keyframes em-pulse-border {{
-  0%, 100% {{ border-left-color: #fbbf24; box-shadow: none; }}
-  50% {{ border-left-color: #f59e0b; box-shadow: 0 0 14px rgba(251, 191, 36, 0.35); }}
+  0%, 100% {{ border-left-color: var(--accent-amber); box-shadow: none; }}
+  50% {{ border-left-color: var(--accent-amber); box-shadow: 0 0 14px rgba(251, 191, 36, 0.35); }}
 }}
 
 /* Anchor jump link in transcript */
 .em-anchor-jump {{
   display: inline-block;
-  padding: 4px 10px;
-  background: rgba(251, 191, 36, 0.15);
-  border: 1px solid rgba(251, 191, 36, 0.35);
+  padding: 5px 12px;
+  background: var(--anchor-jump-bg) !important;
+  border: 1px solid var(--anchor-jump-bd) !important;
   border-radius: var(--radius-sm);
-  color: #fbbf24 !important;
+  color: var(--anchor-jump-tx) !important;
   text-decoration: none !important;
-  font-size: 0.78rem;
+  font-size: 0.80rem;
   font-weight: 600;
   margin-top: 4px;
   transition: var(--transition);
 }}
 .em-anchor-jump:hover {{
-  background: rgba(251, 191, 36, 0.25);
-  border-color: #fbbf24;
+  background: var(--anchor-jump-bd) !important;
+  color: var(--anchor-jump-tx) !important;
 }}
 
 /* Smooth fade-in */

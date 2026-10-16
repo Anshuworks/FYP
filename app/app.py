@@ -53,6 +53,7 @@ def main():
         page_title="EvidenceMeet | AI Meeting Intelligence",
         page_icon="🎙️",
         layout="wide",
+        initial_sidebar_state="expanded",
     )
 
     # ── REQUIREMENT 1: THEME INITIALIZATION ───────────────────────────────
@@ -106,17 +107,24 @@ def main():
         st.markdown('<hr class="em-gradient-divider" />', unsafe_allow_html=True)
 
         # HF Token (Requirement 2: Secure Hugging Face token — masked, no plain-text, no hardcoded secrets)
-        st.markdown("**🔑 Hugging Face Token**")
         env_token = os.environ.get("HF_TOKEN", "")
         hf_token = st.text_input(
-            "Hugging Face Token",
+            "🔑 Hugging Face Token (PyAnnote)",
             type="password",
-            value=env_token if env_token else "",
+            value=st.session_state.get("hf_token_input", env_token if env_token else ""),
             key="hf_token_input",
-            help="Required for PyAnnote speaker diarization. Keep private and masked.",
-            label_visibility="collapsed",
+            help="Required for PyAnnote speaker diarization. Masked & kept private in session state. Falls back to HF_TOKEN environment variable if set.",
+            label_visibility="visible",
         )
-
+        active_token_present = bool((hf_token and hf_token.strip()) or (env_token and env_token.strip()))
+        if active_token_present:
+            if hf_token and hf_token.strip():
+                st.caption("🔒 Custom token active for this session (masked)")
+            else:
+                st.caption("🔒 Loaded from environment variable `HF_TOKEN`")
+        else:
+            st.caption("⚠️ Token required for PyAnnote diarization")
+        
         st.markdown('<hr class="em-gradient-divider" />', unsafe_allow_html=True)
 
         st.markdown("**Team**")
@@ -184,13 +192,20 @@ def main():
         )
         st.audio(uploaded_file)
 
+        # Token status indicator in upload area (Requirement 2)
+        active_token = (hf_token or "").strip() or os.environ.get("HF_TOKEN", "").strip()
+        if not active_token:
+            st.warning("🔑 **Hugging Face Token required** for PyAnnote speaker diarization. Please open the navigation menu (‹) at top-left or configure the `HF_TOKEN` environment variable.")
+        else:
+            st.caption("🔒 Hugging Face Token configured for PyAnnote speaker diarization.")
+
         # ── REQUIREMENT 3: REDESIGNED PROCESSING BUTTON ────────────────────
         process_clicked = st.button(
             "🚀 Process Meeting Audio",
             type="primary",
             key="process_audio_btn",
             use_container_width=True,
-            help="Run Whisper transcription, PyAnnote diarization, and Qwen intelligence extraction.",
+            help="An Pipeline for transcription,diarization,intelligence extraction.",
         )
 
         # Subtle helper script to ensure tooltip never sticks on mouseleave or click
@@ -248,9 +263,9 @@ def main():
                 width=0,
             )
 
-            active_token = hf_token.strip() or os.environ.get("HF_TOKEN", "").strip()
+            active_token = (hf_token or "").strip() or os.environ.get("HF_TOKEN", "").strip()
             if not active_token:
-                st.error("⚠️ Please enter your Hugging Face Token in the sidebar to run the pipeline!")
+                st.error("⚠️ Please enter your Hugging Face Token in the sidebar navigation (‹) to run the pipeline!")
                 st.stop()
 
             file_ext = uploaded_file.name.split(".")[-1]

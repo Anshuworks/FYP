@@ -5,7 +5,7 @@ import time
 
 def transcribe_audio(audio_file_path):
     """
-    Transcribes audio using the Faster-Whisper 'base' model.
+    Transcribes audio using the Faster-Whisper 'small' model.
     Optimized for CPU execution with VAD filtering and Word-Level Timestamps.
 
     Thread count is constrained locally to 4 for ASR (matching Whisper's optimal
@@ -23,7 +23,7 @@ def transcribe_audio(audio_file_path):
     # for any sub-process, but the torch thread control is the effective guard.
     os.environ.setdefault("OMP_NUM_THREADS", "4")
     os.environ.setdefault("MKL_NUM_THREADS", "4")
-    model_size = "base"
+    model_size = "small"
     
     print("Loading Faster-Whisper model...")
     try:

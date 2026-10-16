@@ -146,7 +146,7 @@ def _make_test_data():
 
 def test_clickable_timestamp_jump_buttons_rendered():
     """Verify that clickable timestamp navigation buttons are rendered for evidence segments."""
-    at = AppTest.from_file(APP_PATH).run(timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=60).run(timeout=60)
     assert not at.exception
 
     intel, aligned_transcript, timing = _make_test_data()

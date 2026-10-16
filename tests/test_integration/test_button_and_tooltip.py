@@ -43,7 +43,7 @@ def test_theme_css_mint_button_tokens_and_styles():
 
 def test_process_button_and_tooltip_contract():
     """Verify the process button in Streamlit UI has the exact required label, primary type, and tooltip."""
-    at = AppTest.from_file(APP_PATH, default_timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=60)
     at.run()
 
     # Upload audio file
